@@ -1,12 +1,13 @@
-## REST Client
-
+# REST Client
 ![image](https://user-images.githubusercontent.com/55266110/112777222-ac074980-900f-11eb-897a-10f6a2493ffb.png)
 
-## REST Server
+
+# REST Server
 Link to my demonstration of working server: 
 
 https://stevens.zoom.us/rec/share/ou6Gq4OuNbJ63EEWIeMrMYFhzpaTAipX-FwTe4cwQPHnIo1wYMNuILGeFBR3nTx8.RT5RBfiYK__lUDa2
 
+### Steps:
 #### 1. Run a server in /server
 ```
 node index.js
@@ -41,7 +42,7 @@ curl http://localhost:3000/pvqyqemfr0waff25
        {"success":false,"error":404,"message":"Not Found"}
 ```
 
-## Shell
+# Shell
 
 ### Setting up Git Token
 ```
