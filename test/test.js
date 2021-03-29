@@ -28,7 +28,8 @@ describe("GitHub EndPoint Tests", function() {
     it("createRepo successfully creates repo", async function() {
         
       let user  = await github.getUser();
-      let status = await github.createRepo(user, "test-HW4-345");
+      console.log(user);
+      let status = await github.createRepo(user, "Testing");
       expect(status).to.equal(201);
 
     });
@@ -37,7 +38,7 @@ describe("GitHub EndPoint Tests", function() {
     it("createIssue successfully creates issue", async function() {
       
       let user  = await github.getUser();
-      let status = await github.createIssue(user, "HW4-345", "issue name", "issue body");
+      let status = await github.createIssue(user, "HW4-345", "issue is issue", "issue body is this issue body");
       expect(status).to.equal(201);
 
     });
