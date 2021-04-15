@@ -3,8 +3,6 @@ var request = require('request');
 const chalk  = require('chalk');
 
 var urlRoot = "https://api.github.com";
-// NCSU Enterprise endpoint:
-//var urlRoot = "https://api.github.ncsu.edu";
 
 var userId = "krixstin";
 var config = {};
@@ -24,11 +22,11 @@ console.log(chalk.green(`Your token is: ${config.token.substring(0,4)}...`));
 if (process.env.NODE_ENV != 'test')
 {
 	(async () => {
-		// await listAuthenicatedUserRepos();
-		// await listBranches(userId, "HW4-345");
-		// await createRepo(userId,"fromIndex.js");
-		// await createIssue(userId, "HW4-345", "issueisissue");
-		//await enableWikiSupport(userId,repo);
+		await listAuthenicatedUserRepos();
+		await listBranches(userId, "HW4-345");
+		await createRepo(userId,"fromIndex.js");
+		await createIssue(userId, "HW4-345", "issueisissue");
+		await enableWikiSupport(userId,repo);
 
 	})()
 }
@@ -79,7 +77,7 @@ function listAuthenicatedUserRepos()
 			}
 
 			var obj = JSON.parse(body);
-			// console.log(obj)
+			
 			for( var i = 0; i < obj.length; i++ )
 			{
 				var name = obj[i].name;
@@ -134,7 +132,6 @@ async function createRepo(user,repo)
 	options.body=JSON.stringify({
 		name: repo,
 		description: "testing tepo for 2. ",
-		// has_wiki: true, 
 	});
 
 	console.log();
