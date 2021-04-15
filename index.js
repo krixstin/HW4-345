@@ -1,6 +1,6 @@
 var request = require('request');
 
-const chalk  = require('chalk');
+const chalk = require('chalk');
 
 var urlRoot = "https://api.github.com";
 
@@ -9,7 +9,7 @@ var config = {};
 // Retrieve our api token from the environment variables.
 config.token = process.env.GITHUBTOKEN;
 console.log(config.token);
-if( !config.token )
+if (!config.token)
 {
 	console.log(chalk`{red.bold GITHUBTOKEN is not defined!}`);
 	console.log(`Please set your environment variables with appropriate token.`);
@@ -17,17 +17,16 @@ if( !config.token )
 	process.exit(1);
 }
 
-console.log(chalk.green(`Your token is: ${config.token.substring(0,4)}...`));
+console.log(chalk.green(`Your token is: ${config.token.substring(0, 4)}...`));
 
 if (process.env.NODE_ENV != 'test')
 {
 	(async () => {
 		await listAuthenicatedUserRepos();
 		await listBranches(userId, "HW4-345");
-		await createRepo(userId,"fromIndex.js");
+		await createRepo(userId, "fromIndex.js");
 		await createIssue(userId, "HW4-345", "issueisissue");
-		await enableWikiSupport(userId,repo);
-
+		await enableWikiSupport(userId, repo);
 	})()
 }
 
@@ -69,30 +68,30 @@ function listAuthenicatedUserRepos()
 	{
 		request(options, function (error, response, body) 
 		{
-			if( error )
+			if (error)
 			{
-				console.log( chalk.red( error ));
+				console.log( chalk.red(error));
 				reject(error);
 				return; // Terminate execution.
 			}
 
 			var obj = JSON.parse(body);
 			
-			for( var i = 0; i < obj.length; i++ )
+			for (var i = 0; i < obj.length; i++)
 			{
 				var name = obj[i].name;
 				console.log( name );
 			}
 
 			// Return object for people calling our method.
-			resolve( obj );
+			resolve (obj);
 		});
 	});
 
 }
 
 // 1. Write code for listBranches in a given repo under an owner. See list branches
-async function listBranches(owner,repo)
+async function listBranches(owner, repo)
 {
 	let options = getDefaultOptions(`/repos/${owner}/${repo}/branches`, "GET");
 
@@ -101,22 +100,22 @@ async function listBranches(owner,repo)
 	{
 		request(options, function (error, response, body) {
 
-			if( error )
+			if (error)
 			{
-				console.log( chalk.red( error ));
+				console.log(chalk.red(error));
 				reject(error);
 				return; // Terminate execution.
 			}
 			console.log();
 			var obj = JSON.parse(body);
 			// console.log("OBJJ", obj)
-			for( var i = 0; i < obj.length; i++ )
+			for (var i = 0; i < obj.length; i++)
 			{ 
 				var name = obj[i].name;
-				console.log( name );
+				console.log(name);
 			}
 			
-			resolve( JSON.parse(body) );
+			resolve(JSON.parse(body));
 
 			
 
@@ -145,13 +144,13 @@ async function createRepo(user,repo)
 	{
 		request(options, function (error, response, body) {
 
-			if( error )
+			if (error)
 			{
-				console.log( chalk.red( error ));
+				console.log(chalk.red(error));
 				// reject(error);
 				// return; // Terminate execution.
 			}
-			resolve( response.statusCode );
+			resolve(response.statusCode);
 
 		});
 	});
@@ -175,7 +174,7 @@ async function createIssue(owner,repo, issueName, issueBody)
                 console.log(chalk.red(error));
                 return;
             }
-			resolve( response.statusCode );
+			resolve(response.statusCode);
 
 		});
 	});
@@ -199,7 +198,7 @@ async function enableWikiSupport(owner,repo)
                 console.log(chalk.red(error));
                 return;
             }
-			resolve( JSON.parse(body) );
+			resolve(JSON.parse(body));
 		});
 	});	
 }
@@ -210,5 +209,3 @@ module.exports.listBranches = listBranches;
 module.exports.createRepo = createRepo;
 module.exports.createIssue = createIssue;
 module.exports.enableWikiSupport = enableWikiSupport;
-
-
